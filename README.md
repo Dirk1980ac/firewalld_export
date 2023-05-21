@@ -1,6 +1,6 @@
-# firewalld_rules_export_import
-Firewalld Rules Export and Import
+# FirewallD export
 
+FirewallD rules and policies export  
 
-This script export and import rich-rules, service and port
-
+This script exports FirewallD rules and policies and geberates a bach script to
+install them.
