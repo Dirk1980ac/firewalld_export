@@ -42,12 +42,18 @@ do
   firewall-cmd --list-all --policy=$policies | grep ports | grep 'udp\|tcp' | awk -F"ports:" '{print$2}' | sed -E -e 's/[[:blank:]]+/\n/g' | sed '/^$/d' > pol_ports.list
   sed -i -e "s/^/firewall-cmd --permanent --policy=$policies --add-port=/" pol_ports.list
   cat pol_ports.list >> bash_firewalld_rules_export.sh
-  echo "" >>  bash_firewalld_rules_export.sh
   echo "# Services" >>  bash_firewalld_rules_export.sh
   firewall-cmd --list-all --policy=$policies | grep services | awk -F"services:" '{print$2}' | sed -E -e 's/[[:blank:]]+/\n/g' | sed '/^$/d' > pol_services.list
   sed -i -e "s/^/firewall-cmd --permanent --policy=$policies --add-service=/" pol_services.list
   cat pol_services.list >> bash_firewalld_rules_export.sh
-  echo "" >>  bash_firewalld_rules_export.sh
+  echo "# ingress-zone" >>  bash_firewalld_rules_export.sh
+  firewall-cmd --list-all --policy=$policies | grep ingress-zones | awk -F"ingress-zones:" '{print$2}' | sed -E -e 's/[[:blank:]]+/\n/g' | sed '/^$/d' > pol_ingress.list
+  sed -i -e "s/^/firewall-cmd --permanent --policy=$policies --add-egress-zone=/" pol_ingress.list
+  cat pol_ingress.list >> bash_firewalld_rules_export.sh
+  echo "# egress-zone" >>  bash_firewalld_rules_export.sh
+  firewall-cmd --list-all --policy=$policies | grep egress-zones | awk -F"egress-zones:" '{print$2}' | sed -E -e 's/[[:blank:]]+/\n/g' | sed '/^$/d' > pol_egress.list
+  sed -i -e "s/^/firewall-cmd --permanent --policy=$policies --add-egress-zone=/" pol_egress.list
+  cat pol_egress.list >> bash_firewalld_rules_export.sh
   echo "# Target" >>  bash_firewalld_rules_export.sh
   TARGET=$(firewall-cmd --permanent --policy=$policies --get-target)
   echo "firewall-cmd --permanent --policy=$policies --set-target=$TARGET" >> bash_firewalld_rules_export.sh
