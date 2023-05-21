@@ -9,8 +9,8 @@ do
   echo "# Zone $zones" >> bash_firewalld_rules_export.sh
   echo "# Rich Rules" >> bash_firewalld_rules_export.sh
   firewall-cmd --list-all --zone=$zones | grep 'rule ' | sed -e 's/^[ \t]*//' > richrule.list
-  sed -i -e 's/$/"/' richrule.list
-  sed -i -e 's/^/"/' richrule.list
+  sed -i -e "s/$/'/" richrule.list
+  sed -i -e "s/^/'/" richrule.list
   sed -i -e "s/^/firewall-cmd --zone=$zones --permanent --add-rich-rule=/" richrule.list
   cat richrule.list >> bash_firewalld_rules_export.sh
   echo "# Ports" >>  bash_firewalld_rules_export.sh
@@ -34,8 +34,8 @@ do
   echo "# Policy $policies" >> bash_firewalld_rules_export.sh
   echo "# Rich Rules" >> bash_firewalld_rules_export.sh
   firewall-cmd --list-all --policy=$policies | grep 'rule ' | sed -e 's/^[ \t]*//' > pol_richrule.list
-  sed -i -e 's/$/"/' pol_richrule.list
-  sed -i -e 's/^/"/' pol_richrule.list
+  sed -i -e "s/$/'/" pol_richrule.list
+  sed -i -e "s/^/'/" pol_richrule.list
   sed -i -e "s/^/firewall-cmd --policy=$policies --permanent --add-rich-rule=/" pol_richrule.list
   cat pol_richrule.list >> bash_firewalld_rules_export.sh
   echo "# Ports" >>  bash_firewalld_rules_export.sh
@@ -63,3 +63,4 @@ done < policies.list
 echo "firewall-cmd --reload" >> bash_firewalld_rules_export.sh
 
 rm -rf ./*.list
+chmod u+x bash_firewalld_rules_export.sh
