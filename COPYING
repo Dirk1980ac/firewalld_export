@@ -1,0 +1,10 @@
+firewall-export is provided under:
+
+ SPDX-License-Identifier: GPL-2.0-only
+
+Being under the terms of the GNU General Public License version 2 only,
+according with:
+
+ LICENSES/GPL-2.0
+
+All contributions to the firewall-export project are subject to this license.
