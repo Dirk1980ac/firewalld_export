@@ -2,5 +2,5 @@
 
 FirewallD rules and policies export  
 
-This script exports FirewallD rules and policies and geberates a bach script to
+This script exports FirewallD rules and policies and generates a bash script to
 install them.
