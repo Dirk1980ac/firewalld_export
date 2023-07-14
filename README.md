@@ -15,3 +15,8 @@ To export your FirewallD rules:
 
 This creates a script named firewall-setup.sh which can be executed on the target host(s)
 to create the same rules.
+
+## To do after importing/installing the Rules
+
+Since the interface names may differ (on another host they will for shure), it is up to
+you to assign the interfaces to the zones.
